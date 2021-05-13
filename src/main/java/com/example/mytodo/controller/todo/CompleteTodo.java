@@ -20,7 +20,7 @@ public class CompleteTodo {
         Map<String, Object> res = new HashMap<>();
         try {
             Connection connection = MySqlConnector.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM todo WHERE user_id =? and status='1' ");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM todo WHERE user_id =? and status= 1 ");
 
             preparedStatement.setInt(1, user_id);
             ResultSet resultSet =    preparedStatement.executeQuery();
@@ -32,6 +32,7 @@ public class CompleteTodo {
                 completelist.put("date", resultSet.getDate("date"));
                 completelist.put("info", resultSet.getString("info"));
                 completelist.put("color", resultSet.getString("color"));
+                completelist.put("status", resultSet.getBoolean("status"));
                 complete.add(completelist);
             }
             res.put("complete",complete);

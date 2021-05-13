@@ -26,9 +26,8 @@ public class Login {
             ResultSet resultSet = preparedStatement.executeQuery();//เมื่อexecuteได้รับข้อมูลมาเป็น(query)เลยไปเก็บในresultset(ใช้ไม่เหมือนกับregiเพราะเลือกข้อมูลในตาราง)
 
             if(resultSet.next()){ // .next เพราะว่าresultsetที่0เป็นnull เราเลยต้อง.next เพื่อเป็น1234...
-                Map<String, Object> user = new HashMap<>();
-                user.put("username", resultSet.getString("username"));
-                res.put("user", user);//ตัวแปรเอาไปใช้ในฟ้อนได้ (_,_ ข้างหลังคือค่าข้างหน้าคือชื่อ)
+                res.put("userid",resultSet.getInt("user_id"));//ตัวแปรเอาไปใช้ในฟ้อนได้ (_,_ ข้างหลังคือค่าข้างหน้าคือชื่อ)
+                res.put("username",resultSet.getString("username"));
                 res.put("isLogin", true);
             }
             else {

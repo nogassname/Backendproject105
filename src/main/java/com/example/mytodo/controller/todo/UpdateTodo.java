@@ -39,4 +39,20 @@ public class UpdateTodo {
         return res;
 
     }
+
+    @PostMapping(path = "/edit/status")
+    public void UpdateTodo(@RequestParam int todo_id, @RequestParam Boolean status){
+        Map<String, Object> res = new HashMap<>();
+        try {
+            System.out.println(status);
+            Connection connection = MySqlConnector.getConnection();
+            PreparedStatement preparedStatement = connection.prepareStatement("UPDATE  todo SET status = ? WHERE todo_id = ? ");
+            preparedStatement.setInt(2, todo_id);
+            preparedStatement.setBoolean(1,status);
+            preparedStatement.execute();
+            System.out.println("Update successfully");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

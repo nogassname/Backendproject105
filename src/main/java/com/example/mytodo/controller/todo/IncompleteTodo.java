@@ -22,7 +22,7 @@ public class IncompleteTodo {
         Map<String, Object> res = new HashMap<>();
         try {
             Connection connection = MySqlConnector.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM todo WHERE user_id =? and status='0' ");
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM todo WHERE user_id =? and status= 0 ");
 
             preparedStatement.setInt(1, user_id);
             ResultSet resultSet =    preparedStatement.executeQuery();
@@ -34,6 +34,7 @@ public class IncompleteTodo {
                 incompletelist.put("date", resultSet.getDate("date"));
                 incompletelist.put("info", resultSet.getString("info"));
                 incompletelist.put("color", resultSet.getString("color"));
+                incompletelist.put("status",resultSet.getBoolean("status"));
                 incomplete.add(incompletelist);
             }
             res.put("incomplete",incomplete);

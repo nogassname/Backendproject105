@@ -22,22 +22,17 @@ public class DeleteTodo {
 
 
     @PostMapping(path = "/edit/delete")
-    public Map<String, Object> DeleteTodo(@RequestParam int todo_id) {
-        Map<String, Object> res = new HashMap<>();
+    public void DeleteTodo(@RequestParam int todo_id) {
         try {
             Connection connection = MySqlConnector.getConnection();
-            PreparedStatement preparedStatement = connection.prepareStatement("DELETE from todo where todo_id=? ");
-
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE from todo where todo_id = ? ");
             preparedStatement.setInt(1, todo_id);
-
-
             preparedStatement.execute();
+            System.out.println("Already delete");
         } catch (SQLException e) {
+            System.out.println("Delete fail");
             e.printStackTrace();
-            res.put("success", false);
         }
-        return res;
-
     }
 }
 

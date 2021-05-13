@@ -28,6 +28,7 @@ public class AllTodo {
 
             ArrayList<Object> lists = new ArrayList<>();
             while(resultSet.next()){
+                res.put("isFound",true);
                 Map<String, Object> list = new HashMap<>();
                 list.put("todoid", resultSet.getInt("todo_id"));
                 list.put("date", resultSet.getDate("date"));
